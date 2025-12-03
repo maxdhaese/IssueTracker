@@ -3,6 +3,7 @@ package org.max.issuetracker.domain.service;
 import org.max.issuetracker.domain.model.User;
 import org.max.issuetracker.domain.repository.UserRepository;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +20,15 @@ public class UserService {
             throw new IllegalArgumentException("Username already exists: " + username);
         });
 
-        User user = new User(null, username, email, passwordHash, role, null, null);
-        return userRepository.save(user);
+        User user = new User(
+                null,
+                username,
+                email,
+                passwordHash,
+                role,
+                Instant.now(),
+                Instant.now()
+        );
     }
 
     public Optional<User> findById(Long id) {
