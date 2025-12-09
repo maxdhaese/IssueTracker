@@ -8,7 +8,7 @@ public class User {
     private final Long id;
     private final String username;
     private final String email;
-    private final String paswordHash;
+    private final String passwordHash;
     private final String role;
     private final Instant createdAt;
     private final Instant updatedAt;
@@ -17,7 +17,7 @@ public class User {
         this.id = id;
         this.username = Objects.requireNonNull(username);
         this.email = Objects.requireNonNull(email);
-        this.paswordHash = Objects.requireNonNull(paswordHash);
+        this.passwordHash = Objects.requireNonNull(paswordHash);
         this.role = Objects.requireNonNull(role);
         this.createdAt = createdAt != null ? createdAt : Instant.now();
         this.updatedAt = updatedAt != null ? updatedAt : Instant.now();
@@ -35,8 +35,8 @@ public class User {
         return email;
     }
 
-    public String getPaswordHash() {
-        return paswordHash;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
     public String getRole() {

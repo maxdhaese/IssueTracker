@@ -29,6 +29,7 @@ public class UserService {
                 Instant.now(),
                 Instant.now()
         );
+        return userRepository.save(user);
     }
 
     public Optional<User> findById(Long id) {
