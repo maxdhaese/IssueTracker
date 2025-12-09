@@ -2,11 +2,13 @@ package org.max.issuetracker.domain.service;
 
 import org.max.issuetracker.domain.model.Issue;
 import org.max.issuetracker.domain.repository.IssueRepository;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class IssueService {
 
     private final IssueRepository issueRepository;

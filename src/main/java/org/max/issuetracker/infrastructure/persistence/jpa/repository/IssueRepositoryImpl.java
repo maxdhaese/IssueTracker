@@ -4,10 +4,12 @@ import org.max.issuetracker.domain.model.Issue;
 import org.max.issuetracker.domain.repository.IssueRepository;
 import org.max.issuetracker.infrastructure.persistence.jpa.entity.IssueEntity;
 import org.max.issuetracker.infrastructure.persistence.jpa.mapper.IssueMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class IssueRepositoryImpl implements IssueRepository {
 
     private final SpringDataIssueJpaRepository jpa;

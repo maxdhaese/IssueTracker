@@ -4,10 +4,12 @@ import org.max.issuetracker.domain.model.Project;
 import org.max.issuetracker.domain.repository.ProjectRepository;
 import org.max.issuetracker.infrastructure.persistence.jpa.entity.ProjectEntity;
 import org.max.issuetracker.infrastructure.persistence.jpa.mapper.ProjectMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class ProjectRepositoryImpl implements ProjectRepository {
 
     private final SpringDataProjectJpaRepository jpa;

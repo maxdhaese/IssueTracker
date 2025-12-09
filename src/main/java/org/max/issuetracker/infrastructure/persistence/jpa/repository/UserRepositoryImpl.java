@@ -4,10 +4,12 @@ import org.max.issuetracker.domain.model.User;
 import org.max.issuetracker.domain.repository.UserRepository;
 import org.max.issuetracker.infrastructure.persistence.jpa.entity.UserEntity;
 import org.max.issuetracker.infrastructure.persistence.jpa.mapper.UserMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     private final SpringDataUserJpaRepository jpa;
