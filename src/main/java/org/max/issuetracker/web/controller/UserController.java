@@ -5,6 +5,7 @@ import org.max.issuetracker.domain.service.UserService;
 import org.max.issuetracker.web.dto.CreateUserRequest;
 import org.max.issuetracker.web.dto.UserDTO;
 import org.max.issuetracker.web.dto.UserWebMapper;
+import org.max.issuetracker.web.exception.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class UserController {
     public UserDTO get(@PathVariable long id){
         return service.findById(id).
                 map(UserWebMapper::toDTO).
-                orElseThrow(()-> new IllegalArgumentException("User not found: " + id));
+                orElseThrow(()-> new NotFoundException("User with id " + id + " not found"));
     }
 
     @GetMapping

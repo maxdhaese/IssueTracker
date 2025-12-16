@@ -1,11 +1,13 @@
 package org.max.issuetracker.web.controller;
 
 
+import org.hibernate.annotations.NotFound;
 import org.max.issuetracker.domain.model.Issue;
 import org.max.issuetracker.domain.service.IssueService;
 import org.max.issuetracker.web.dto.CreateIssueRequest;
 import org.max.issuetracker.web.dto.IssueDTO;
 import org.max.issuetracker.web.dto.IssueWebMapper;
+import org.max.issuetracker.web.exception.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +44,7 @@ public class IssueController {
     public IssueDTO get(@PathVariable Long id){
         return service.findById(id)
                 .map(IssueWebMapper::toDTO)
-                .orElseThrow(() -> new IllegalArgumentException("Issue not found: " + id));
+                .orElseThrow(() -> new NotFoundException("Issue with id " + id + " not found"));
     }
 
     @GetMapping("/project/{projectId}")

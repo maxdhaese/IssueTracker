@@ -5,6 +5,7 @@ import org.max.issuetracker.domain.service.ProjectService;
 import org.max.issuetracker.web.dto.CreateProjectRequest;
 import org.max.issuetracker.web.dto.ProjectDTO;
 import org.max.issuetracker.web.dto.ProjectWebMapper;
+import org.max.issuetracker.web.exception.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class ProjectController {
     public ProjectDTO get(@PathVariable Long id){
         return service.findById(id)
                 .map(ProjectWebMapper::toDTO)
-                .orElseThrow(() -> new IllegalArgumentException("Project not found: " + id));
+                .orElseThrow(() -> new NotFoundException("Project with id " + id + " not found"));
     }
 
     @GetMapping
