@@ -1,5 +1,6 @@
 package org.max.issuetracker.web.controller;
 
+import jakarta.validation.Valid;
 import org.max.issuetracker.domain.model.User;
 import org.max.issuetracker.domain.service.UserService;
 import org.max.issuetracker.web.dto.CreateUserRequest;
@@ -21,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDTO create(@RequestBody CreateUserRequest req) {
+    public UserDTO create(@Valid @RequestBody CreateUserRequest req) {
         User created = service.createUser(
                 req.username(),
                 req.email(),

@@ -1,5 +1,6 @@
 package org.max.issuetracker.web.controller;
 
+import jakarta.validation.Valid;
 import org.max.issuetracker.domain.model.Project;
 import org.max.issuetracker.domain.service.ProjectService;
 import org.max.issuetracker.web.dto.CreateProjectRequest;
@@ -21,7 +22,7 @@ public class ProjectController {
     }
 
     @PostMapping
-    public ProjectDTO create(@RequestBody CreateProjectRequest req){
+    public ProjectDTO create(@Valid @RequestBody CreateProjectRequest req){
         Project project = service.createProject(
                 req.name(),
                 req.projectKey(),
