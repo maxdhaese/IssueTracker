@@ -1,3 +1,6 @@
+🚧 Work in progress – actively developed
+
+
 # IssueTracker Backend
 
 Spring Boot backend for a renovation project management application.
