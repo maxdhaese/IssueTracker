@@ -6,8 +6,8 @@
 Spring Boot backend for a renovation project management application.
 
 ## Tech stack
-- Java 17
-- Spring Boot
+- Java 21
+- Spring Boot 3.5.8
 - Spring Data JPA
 - PostgreSQL
 - Flyway
