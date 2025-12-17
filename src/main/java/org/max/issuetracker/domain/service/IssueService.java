@@ -1,7 +1,12 @@
 package org.max.issuetracker.domain.service;
 
+import org.max.issuetracker.domain.enums.IssueStatus;
+import org.max.issuetracker.domain.enums.IssueType;
+import org.max.issuetracker.domain.enums.Priority;
 import org.max.issuetracker.domain.model.Issue;
 import org.max.issuetracker.domain.repository.IssueRepository;
+import org.max.issuetracker.web.exception.BadRequestException;
+import org.max.issuetracker.web.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -21,9 +26,9 @@ public class IssueService {
                              Long sprintId,
                              String title,
                              String description,
-                             String type,
-                             String status,
-                             String priority,
+                             IssueType type,
+                             IssueStatus status,
+                             Priority priority,
                              Long assigneeId,
                              Long reporterId,
                              Integer storyPoints,
@@ -65,9 +70,19 @@ public class IssueService {
         return issueRepository.findByAssigneeId(userId);
     }
 
-    public Issue updateStatus(Long issueId, String newStatus) {
+    public Issue updateStatus(Long issueId, IssueStatus newStatus) {
         Issue issue = issueRepository.findById(issueId)
-                .orElseThrow(() -> new IllegalArgumentException("Issue not found: " + issueId));
+                .orElseThrow(() -> new NotFoundException("Issue not found: " + issueId));
+
+        if (issue.getStatus() == newStatus) {
+            return issue; // no-op
+        }
+
+        if (!issue.getStatus().canTransitionTo(newStatus)) {
+            throw new BadRequestException(
+                    "Cannot change issue status from " + issue.getStatus() + " to " + newStatus
+            );
+        }
 
         Issue updated = new Issue(
                 issue.getId(),

@@ -2,6 +2,7 @@ package org.max.issuetracker.domain.service;
 
 import org.max.issuetracker.domain.model.User;
 import org.max.issuetracker.domain.repository.UserRepository;
+import org.max.issuetracker.web.exception.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -19,7 +20,7 @@ public class UserService {
 
     public User createUser(String username, String email, String passwordHash, String role) {
         userRepository.findByUsername(username).ifPresent(u -> {
-            throw new IllegalArgumentException("Username already exists: " + username);
+            throw new BadRequestException("Username already exists: " + username);
         });
 
         User user = new User(

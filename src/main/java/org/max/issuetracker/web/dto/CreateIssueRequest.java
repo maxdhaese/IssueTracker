@@ -1,6 +1,8 @@
 package org.max.issuetracker.web.dto;
 
 import jakarta.validation.constraints.*;
+import org.max.issuetracker.domain.enums.IssueStatus;
+import org.max.issuetracker.domain.enums.IssueType;
 
 public record CreateIssueRequest(
         @NotNull(message = "Project id is required")
@@ -16,10 +18,10 @@ public record CreateIssueRequest(
         String description,
 
         @NotBlank(message = "Issue type is required")
-        String type,
+        IssueType type,
 
         @NotBlank(message = "Issue status is required")
-        String status,
+        IssueStatus status,
 
         @NotBlank(message = "Issue priority is required")
         String priority,

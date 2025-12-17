@@ -1,6 +1,9 @@
 package org.max.issuetracker.infrastructure.persistence.jpa.entity;
 
 import jakarta.persistence.*;
+import org.max.issuetracker.domain.enums.IssueStatus;
+import org.max.issuetracker.domain.enums.IssueType;
+import org.max.issuetracker.domain.enums.Priority;
 
 import java.time.Instant;
 
@@ -23,11 +26,12 @@ public class IssueEntity {
 
     private String description;
 
-    private String type;      // BUG / FEATURE / TASK
+    @Enumerated(EnumType.STRING)
+    private IssueType type;      // BUG / FEATURE / TASK
 
-    private String status;    // TO_DO / ...
+    private IssueStatus status;    // TO_DO / ...
 
-    private String priority;  // LOW / MEDIUM / HIGH / CRITICAL
+    private Priority priority;  // LOW / MEDIUM / HIGH / CRITICAL
 
     @Column(name = "assignee_id")
     private Long assigneeId;
@@ -55,9 +59,9 @@ public class IssueEntity {
                        Long sprintId,
                        String title,
                        String description,
-                       String type,
-                       String status,
-                       String priority,
+                       IssueType type,
+                       IssueStatus status,
+                       Priority priority,
                        Long assigneeId,
                        Long reporterId,
                        Integer storyPoints,
@@ -87,9 +91,9 @@ public class IssueEntity {
     public Long getSprintId() { return sprintId; }
     public String getTitle() { return title; }
     public String getDescription() { return description; }
-    public String getType() { return type; }
-    public String getStatus() { return status; }
-    public String getPriority() { return priority; }
+    public IssueType getType() { return type; }
+    public IssueStatus getStatus() { return status; }
+    public Priority getPriority() { return priority; }
     public Long getAssigneeId() { return assigneeId; }
     public Long getReporterId() { return reporterId; }
     public Integer getStoryPoints() { return storyPoints; }
@@ -103,9 +107,9 @@ public class IssueEntity {
     public void setSprintId(Long sprintId) { this.sprintId = sprintId; }
     public void setTitle(String title) { this.title = title; }
     public void setDescription(String description) { this.description = description; }
-    public void setType(String type) { this.type = type; }
-    public void setStatus(String status) { this.status = status; }
-    public void setPriority(String priority) { this.priority = priority; }
+    public void setType(IssueType type) { this.type = type; }
+    public void setStatus(IssueStatus status) { this.status = status; }
+    public void setPriority(Priority priority) { this.priority = priority; }
     public void setAssigneeId(Long assigneeId) { this.assigneeId = assigneeId; }
     public void setReporterId(Long reporterId) { this.reporterId = reporterId; }
     public void setStoryPoints(Integer storyPoints) { this.storyPoints = storyPoints; }

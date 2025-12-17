@@ -1,5 +1,9 @@
 package org.max.issuetracker.domain.model;
 
+import org.max.issuetracker.domain.enums.IssueStatus;
+import org.max.issuetracker.domain.enums.IssueType;
+import org.max.issuetracker.domain.enums.Priority;
+
 import java.time.Instant;
 import java.util.Objects;
 
@@ -9,9 +13,9 @@ public class Issue {
     private final Long sprintId;       // can be null
     private final String title;
     private final String description;
-    private final String type;         // BUG / FEATURE / TASK
-    private final String status;       // TO_DO / IN_PROGRESS / DONE
-    private final String priority;     // LOW / MEDIUM / HIGH / CRITICAL
+    private final IssueType type;         // BUG / FEATURE / TASK
+    private final IssueStatus status;       // TO_DO / IN_PROGRESS / DONE
+    private final Priority priority;     // LOW / MEDIUM / HIGH / CRITICAL
     private final Long assigneeId;     // can be null
     private final Long reporterId;     // required
     private final Integer storyPoints; // can be null
@@ -19,7 +23,7 @@ public class Issue {
     private final Instant createdAt;
     private final Instant updatedAt;
 
-    public Issue(Long id, Long projectId, Long sprintId, String title, String description, String type, String status, String priority, Long assigneeId, Long reporterId, Integer storyPoints, Long boardColumnId, Instant createdAt, Instant updatedAt) {
+    public Issue(Long id, Long projectId, Long sprintId, String title, String description, IssueType type, IssueStatus status, Priority priority, Long assigneeId, Long reporterId, Integer storyPoints, Long boardColumnId, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.projectId = Objects.requireNonNull(projectId);
         this.sprintId = sprintId;
@@ -56,15 +60,15 @@ public class Issue {
         return description;
     }
 
-    public String getType() {
+    public IssueType getType() {
         return type;
     }
 
-    public String getStatus() {
+    public IssueStatus getStatus() {
         return status;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 

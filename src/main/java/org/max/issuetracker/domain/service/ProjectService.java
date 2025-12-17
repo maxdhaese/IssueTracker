@@ -2,6 +2,7 @@ package org.max.issuetracker.domain.service;
 
 import org.max.issuetracker.domain.model.Project;
 import org.max.issuetracker.domain.repository.ProjectRepository;
+import org.max.issuetracker.web.exception.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -19,7 +20,7 @@ public class ProjectService {
 
     public Project createProject(String name, String key, String description, Long ownerId) {
         projectRepository.findByProjectKey(key).ifPresent(p -> {
-            throw new IllegalArgumentException("Project key already exists: " + key);
+            throw new BadRequestException("Project key already exists: " + key);
         });
 
         Project project = new Project(
