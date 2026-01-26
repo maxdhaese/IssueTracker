@@ -2,6 +2,7 @@ package org.max.issuetracker.web.controller;
 
 
 import org.hibernate.annotations.NotFound;
+import org.max.issuetracker.domain.enums.Priority;
 import org.max.issuetracker.domain.model.Issue;
 import org.max.issuetracker.domain.service.IssueService;
 import org.max.issuetracker.web.dto.CreateIssueRequest;
@@ -31,7 +32,7 @@ public class IssueController {
                 req.description(),
                 req.type(),
                 req.status(),
-                req.priority(),
+                Priority.valueOf(req.priority()),
                 req.assigneeId(),
                 req.reporterId(),
                 req.storyPoints(),

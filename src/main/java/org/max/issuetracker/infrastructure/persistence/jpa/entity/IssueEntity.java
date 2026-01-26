@@ -29,8 +29,10 @@ public class IssueEntity {
     @Enumerated(EnumType.STRING)
     private IssueType type;      // BUG / FEATURE / TASK
 
+    @Enumerated(EnumType.STRING)
     private IssueStatus status;    // TO_DO / ...
 
+    @Enumerated(EnumType.STRING)
     private Priority priority;  // LOW / MEDIUM / HIGH / CRITICAL
 
     @Column(name = "assignee_id")

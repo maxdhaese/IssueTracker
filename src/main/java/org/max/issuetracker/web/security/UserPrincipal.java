@@ -20,40 +20,26 @@ public class UserPrincipal implements UserDetails {
         return user.getId();
     }
 
-
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // verwacht bv "ADMIN" / "USER" -> maak er "ROLE_ADMIN van"
-        return List.of(new SimpleGrantedAuthority(("ROLE_" + user.getRole())));
+    public String getUsername() {
+        return user.getUsername();
     }
 
     @Override
     public String getPassword() {
-        return "";
+        return user.getPasswordHash();
     }
 
     @Override
-    public String getUsername() {
-        return "";
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        String role = user.getRole();
+        if (role == null || role.isBlank()) role = "USER";
+        if (!role.startsWith("ROLE_")) role = "ROLE_" + role;
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
+    @Override public boolean isAccountNonExpired() { return true; }
+    @Override public boolean isAccountNonLocked() { return true; }
+    @Override public boolean isCredentialsNonExpired() { return true; }
+    @Override public boolean isEnabled() { return true; }
 }

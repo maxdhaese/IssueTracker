@@ -1,4 +1,6 @@
 package org.max.issuetracker.web.dto;
 
-public class TokenResponse {
-}
+public record TokenResponse(
+        String token,
+        String tokenType
+) {}

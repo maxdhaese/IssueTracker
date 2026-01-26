@@ -9,4 +9,5 @@ public interface SpringDataUserJpaRepository extends JpaRepository<UserEntity, L
 
     Optional<UserEntity>findByUsername(String username);
 
+    Optional<UserEntity>findByEmail(String username);
 }

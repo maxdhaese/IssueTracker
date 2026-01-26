@@ -1,7 +1,7 @@
 package org.max.issuetracker.web.security;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -17,13 +17,19 @@ public class JwtConfig {
 
     @Bean
     JwtEncoder jwtEncoder(@Value("${security.jwt.secret}") String secret) {
-        var key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+        var key = new SecretKeySpec(
+                secret.getBytes(StandardCharsets.UTF_8),
+                "HmacSHA256"
+        );
         return new NimbusJwtEncoder(new ImmutableSecret<>(key));
     }
 
     @Bean
     JwtDecoder jwtDecoder(@Value("${security.jwt.secret}") String secret) {
-        var key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+        var key = new SecretKeySpec(
+                secret.getBytes(StandardCharsets.UTF_8),
+                "HmacSHA256"
+        );
         return NimbusJwtDecoder.withSecretKey(key).build();
     }
 }
